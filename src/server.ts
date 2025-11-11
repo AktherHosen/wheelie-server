@@ -1,18 +1,17 @@
 import { Server } from "http";
 import mongoose from "mongoose";
 import app from "./app";
+import { envVars } from "./app/config/env";
 
 let server: Server;
 
 const startServer = async () => {
   try {
-    await mongoose.connect(
-      "mongodb+srv://wheelie:tpp7iIUBT09GCbH8@cluster0.bmhyihx.mongodb.net/wheelie?appName=Cluster0"
-    );
+    await mongoose.connect(envVars.DB_URL);
 
     console.log("Connect to DB!");
-    server = app.listen(5001, () => {
-      console.log(`Server is listening to port 5001`);
+    server = app.listen(envVars.PORT, () => {
+      console.log(`Server is listening to port ${envVars.PORT}`);
     });
   } catch (error) {
     console.log(error);
@@ -42,7 +41,7 @@ process.on("unhandledRejection", (err) => {
   process.exit(1);
 });
 
-Promise.reject(new Error("I forgot to catch this promise"));
+// Promise.reject(new Error("I forgot to catch this promise"));
 
 // Unhandled exception error
 process.on("uncaughtException", (err) => {
