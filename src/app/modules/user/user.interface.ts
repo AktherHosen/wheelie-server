@@ -23,7 +23,7 @@ export interface IUser {
   phone?: string;
   picture?: string;
   address?: string;
-  isDeleted?: string;
+  isDeleted?: boolean ;
   isActive?: IsActive;
   auths: IAuthProvider[];
   role: Role;
